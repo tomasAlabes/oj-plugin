@@ -1,28 +1,36 @@
 // MyPlugin.js
 
+const path = require('path');
+const fs = require('fs');
+
 function OjPlugin(options) {
   // Configure your plugin with options...
 }
 
 OjPlugin.prototype.apply = function(compiler) {
+  var self = this;
   var ojCore = "ojs/ojcore";
   var folder = compiler.options.context;
-  
-  console.log(folder)
 
+  var ojCore = path.join(folder, "bower_components/oraclejet/dist/js/libs/oj/debug/ojcore.js");
 
-  var entry = path.join(folder, self.entry);
-  var output = path.join(folder, self.output);
+  fs.readFile(ojCore, 'utf8', function (err, data) {
+    if (err) {
+      throw err;
+    }
+    fs.writeFileSync(ojCore, data.replace("require(requestedBundles,", "myUniqueFunctionToReplaceInOjCore(requestedBundles,"));
 
-  fs.readFile(entry, 'utf8', function (err, data) {
-    data.replace("require(requestedBundles,", "myUniqueFunctionToReplaceInOjCore(requestedBundles,")
-    
     compiler.plugin('done', function (stats) {
-      data = data.replace("myUniqueFunctionToReplaceInOjCore", "require");
-      fs.writeFileSync(output, data);
+      var outputPath = compiler.outputPath;
+      Object.keys(stats.compilation.assets).filter(asset => asset.match(/\.js$/) !== null)
+        .map(bundle => path.join(outputPath, bundle))
+        .forEach(function(bundle){
+          var newOutput = fs.readFileSync(bundle, 'utf8').replace("myUniqueFunctionToReplaceInOjCore", "require");
+          fs.writeFileSync(bundle, newOutput);
+        });
     });
   });
 
 };
 
-module.exports = MyPlugin;
+module.exports = OjPlugin;
