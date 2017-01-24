@@ -24,6 +24,7 @@ OjPlugin.prototype.apply = function (compiler) {
     //the main compilation instance
     //all subsequent methods are derived from compilation.plugin
     compilation.plugin("optimize-chunk-assets", function (chunks, callback) {
+      //ToDo this seems a pretty non-performant approach, need to figure out how to improve it
       chunks.forEach(function (chunk) {
         chunk.files.forEach(function (file) {
           compilation.assets[file] = new ConcatSource(compilation.assets[file].source().replace("myUniqueFunctionToReplaceInOjCore", "require"));
