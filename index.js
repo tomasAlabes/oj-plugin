@@ -4,7 +4,9 @@ const ConcatSource = require('webpack-sources').ConcatSource;
 
 function OjPlugin(options) {
   // Configure plugin with options...
-  this.ojCorePath = options.ojCorePath || "bower_components/oraclejet/dist/js/libs/oj/debug/ojcore.js";
+  if (options) {
+    this.ojCorePath = options.ojCorePath || "bower_components/oraclejet/dist/js/libs/oj/debug/ojcore.js";
+  }
 }
 
 OjPlugin.prototype.apply = function (compiler) {

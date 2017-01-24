@@ -19,6 +19,15 @@ plugins: [
 ]
 ```
 
+```javascript
+plugins: [
+  // ...
+  new ojPlugin({
+    ojCorePath: "bower_components/oraclejet/dist/js/libs/oj/debug/ojcore.js"
+  })
+]
+```
+
 ## What it does
 
 Replaces the dynamic require (`require(requestedBundles` inside `oj/core` `oj.Config.setLocale` function) 
