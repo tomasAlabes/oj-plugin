@@ -1,6 +1,6 @@
 {
   "name": "oj-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Webpack plugin to replace conflicting code from Oracle Jet's ojs/ojcore file",
   "main": "index.js",
   "keywords": [
