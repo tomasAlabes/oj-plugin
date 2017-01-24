@@ -2,10 +2,14 @@ const path = require('path');
 const fs = require('fs');
 const ConcatSource = require('webpack-sources').ConcatSource;
 
+const defaultOjCorePath = "bower_components/oraclejet/dist/js/libs/oj/debug/ojcore.js";
+
 function OjPlugin(options) {
   // Configure plugin with options...
+  this.ojCorePath = defaultOjCorePath;
+  
   if (options) {
-    this.ojCorePath = options.ojCorePath || "bower_components/oraclejet/dist/js/libs/oj/debug/ojcore.js";
+    this.ojCorePath = options.ojCorePath || defaultOjCorePath;
   }
 }
 
