@@ -1,19 +1,15 @@
-// MyPlugin.js
-
 const path = require('path');
 const fs = require('fs');
 const ConcatSource = require('webpack-sources').ConcatSource;
 
 function OjPlugin(options) {
-  // Configure your plugin with options...
+  // Configure plugin with options...
+  this.ojCorePath = options.ojCorePath || "bower_components/oraclejet/dist/js/libs/oj/debug/ojcore.js";
 }
 
 OjPlugin.prototype.apply = function (compiler) {
-  var self = this;
-  var ojCore = "ojs/ojcore";
   var folder = compiler.options.context;
-
-  var ojCore = path.join(folder, "bower_components/oraclejet/dist/js/libs/oj/debug/ojcore.js");
+  var ojCore = path.join(folder, this.ojCorePath);
   var originalOjCore = fs.readFileSync(ojCore, 'utf8');
 
   fs.writeFileSync(ojCore, originalOjCore.replace("require(requestedBundles,", "myUniqueFunctionToReplaceInOjCore(requestedBundles,"));

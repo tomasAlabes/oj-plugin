@@ -9,5 +9,8 @@
     "oraclejet"
   ],
   "author": "Tomas Alabes",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "webpack-sources": "0.1.4"
+  }
 }
