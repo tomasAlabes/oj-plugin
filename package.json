@@ -8,7 +8,12 @@
     "plugin",
     "oraclejet"
   ],
-  "author": "Tomas Alabes",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomasAlabes/oj-plugin"
+  },
+  "bugs": "https://github.com/tomasAlabes/oj-plugin/issues",
+  "author": "Tomas Alabes <tomas.alabes@gmail.com> (http://tomasalabes.me)",
   "license": "MIT",
   "dependencies": {
     "webpack-sources": "0.1.4"
