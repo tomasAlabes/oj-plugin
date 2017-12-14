@@ -4,7 +4,7 @@ Webpack plugin to replace conflicting code from Oracle Jet's `ojs/ojcore` file
 
 ## Installation
 
-`yarn add oj-plugin`
+`yarn add --dev oj-plugin`
 
 ## How to use
 
@@ -23,6 +23,7 @@ plugins: [
 plugins: [
   // ...
   new ojPlugin({
+    // plugin default path
     ojCorePath: "node_modules/oraclejet/dist/js/libs/oj/debug/ojcore.js"
   })
 ]
@@ -30,7 +31,7 @@ plugins: [
 
 ## What it does
 
-Check the replacements done in the index.js. They are a few but are documented.
+Check the replacements done in the [index.js](https://github.com/tomasAlabes/oj-plugin/blob/master/index.js). They are a few but are documented.
 
 ## License
 
