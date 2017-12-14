@@ -1,11 +1,11 @@
 {
   "name": "oj-plugin",
-  "version": "1.0.2",
-  "description": "Webpack plugin to replace conflicting code from Oracle Jet's 3 ojs/ojcore file",
+  "version": "2.0.0",
+  "description": "Webpack plugin to replace conflicting code from Oracle Jet's ojs/ojcore file",
   "main": "index.js",
   "keywords": [
     "webpack",
-    "plugin",
+    "webpack-plugin",
     "oraclejet"
   ],
   "repository": {
@@ -16,6 +16,9 @@
   "author": "Tomas Alabes <tomas.alabes@gmail.com> (http://tomasalabes.me)",
   "license": "MIT",
   "dependencies": {
-    "webpack-sources": "0.1.4"
+    "webpack-sources": "^1.1.0"
+  },
+  "peerDependencies": {
+    "webpack": ">=2.0.0"
   }
 }

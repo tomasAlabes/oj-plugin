@@ -4,7 +4,7 @@ Webpack plugin to replace conflicting code from Oracle Jet's `ojs/ojcore` file
 
 ## Installation
 
-`npm install --save oj-loader`
+`yarn add oj-plugin`
 
 ## How to use
 
@@ -23,15 +23,14 @@ plugins: [
 plugins: [
   // ...
   new ojPlugin({
-    ojCorePath: "bower_components/oraclejet/dist/js/libs/oj/debug/ojcore.js"
+    ojCorePath: "node_modules/oraclejet/dist/js/libs/oj/debug/ojcore.js"
   })
 ]
 ```
 
 ## What it does
 
-Replaces the dynamic require (`require(requestedBundles` inside `oj/core` `oj.Config.setLocale` function) 
-before Webpack parses it, and copies it back after it.
+Check the replacements done in the index.js. They are a few but are documented.
 
 ## License
 

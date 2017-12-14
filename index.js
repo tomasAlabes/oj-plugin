@@ -14,12 +14,28 @@ module.exports = class ojPlugin {
     }
   }
   apply(compiler) {
-    var folder = compiler.options.context;
-    var ojCore = path.join(folder, this.ojCorePath);
-    var originalOjCore = fs.readFileSync(ojCore, 'utf8');
+    const folder = compiler.options.context;
+    const ojCore = path.join(folder, this.ojCorePath);
+    let originalOjCore = fs.readFileSync(ojCore, 'utf8');
   
-    fs.writeFileSync(ojCore, originalOjCore.replace("require(requestedBundles,", "myUniqueFunctionToReplaceInOjCore(requestedBundles,"));
-  
+    const newOjCore = originalOjCore
+                                    // avoid un-resolvable dynamic require
+                                    .replace("require(requestedBundles,", "myUniqueFunctionToReplaceInOjCore(requestedBundles,")
+                                    // we don't want 'oj' to be added in window
+                                    .replace("typeof window !== 'undefined'", "false")
+                                    // self equals to window, so we replace it for a new object
+                                    .replace("_scope = self;", "_scope = {};")
+                                    // if amd is present, we define the ojs/ojcore module returning our oj object
+                                    .replace(";return oj;", `
+                                              if(oj.__isAmdLoaderPresent()) {
+                                                define("ojs/ojcore", [], function() {
+                                                  return oj;
+                                                } );
+                                              }
+                                              ;return oj;`);
+
+    fs.writeFileSync(ojCore, newOjCore);
+
     compiler.plugin("compilation", function (compilation) {
       //the main compilation instance
       //all subsequent methods are derived from compilation.plugin
